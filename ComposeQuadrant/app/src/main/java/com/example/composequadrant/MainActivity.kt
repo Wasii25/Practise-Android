@@ -42,15 +42,15 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Quadrant(text: String,title: String, color: Color, modifier: Modifier = Modifier) {
     Surface (
-        modifier = Modifier
-            .fillMaxSize()
-            .background(color)
+        color = color,
+        modifier = modifier.fillMaxSize()
     ){
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
             modifier = Modifier
                 .padding(16.dp)
+                .fillMaxSize()
         ) {
             Text(
                 text = title,
@@ -72,29 +72,37 @@ fun Quadrant(text: String,title: String, color: Color, modifier: Modifier = Modi
 @Composable
 fun ComposeQuadrant(modifier: Modifier = Modifier) {
     Column {
-        Row {
+        Row (
+            modifier = Modifier.weight(1F)
+        ){
             Quadrant(
                 text = stringResource( R.string.text1),
                 title = stringResource(R.string.title1),
                 color = colorResource(R.color.color1),
+                modifier = Modifier.weight(1F),
             )
             Quadrant(
                 text = stringResource( R.string.text2),
                 title = stringResource(R.string.title2),
                 color = colorResource(R.color.color2),
-            )
+                modifier = Modifier.weight(1F),
+                )
         }
-        Row {
+        Row (
+            modifier = Modifier.weight(1F)
+        ){
             Quadrant(
                 text = stringResource( R.string.text3),
                 title = stringResource(R.string.title3),
                 color = colorResource(R.color.color3),
-            )
+                modifier = Modifier.weight(1F),
+                )
             Quadrant(
                 text = stringResource( R.string.text4),
                 title = stringResource(R.string.title4),
                 color = colorResource(R.color.color4),
-            )
+                modifier = Modifier.weight(1F),
+                )
         }
     }
 }
