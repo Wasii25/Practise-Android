@@ -6,24 +6,10 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -48,140 +34,117 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun LemonadeWithTextAndImages(modifier: Modifier = Modifier) {
+    var state by remember { mutableIntStateOf(1) }
+    var result by remember { mutableIntStateOf((2..4).random()) }
+    var clicks by remember { mutableIntStateOf(0) }
 
-    var state by remember { mutableStateOf(1) }
-    val imageResource = when(state) {
+    val imageResource = when (state) {
         1 -> R.drawable.lemon_tree
         2 -> R.drawable.lemon_squeeze
         3 -> R.drawable.lemon_drink
         else -> R.drawable.lemon_restart
     }
+
     Surface(
         modifier = Modifier.fillMaxSize(),
-        color = Color(0xFFFFF8E1)
+        color = Color(0xFFFFF8E1) // Soft yellow background
     ) {
-        when(state) {
-            1 -> {
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center,
-                ) {
-
-                    Image(
-                        painter = painterResource(imageResource),
-                        contentDescription = stringResource(R.string.lemon_tree),
-                        modifier = Modifier
-                            .wrapContentSize()
-                            .clickable{
-                                state = 2
-                            }
-                    )
-
-
-                    Spacer(
-                        modifier = Modifier.height(16.dp)
-                    )
-
-                    Text(
-                        text = stringResource(R.string.select_lemon),
-                        fontSize = 18.sp,
-                    )
-                }
-            }
-
-            2 -> {
-                var result by remember { mutableIntStateOf((2..4).random()) }
-                var clicks by remember { mutableIntStateOf(0) }
-
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center,
-                ) {
-                    Image(
-                        painter = painterResource(imageResource),
-                        contentDescription = stringResource(R.string.lemon),
-                        modifier = Modifier
-                            .wrapContentSize()
-                            .clickable{
-                                if(clicks == result) state = 3
-                                else {
-                                    clicks++
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Image(
+                painter = painterResource(imageResource),
+                contentDescription = null,
+                modifier = Modifier
+                    .wrapContentSize()
+                    .clickable {
+                        when (state) {
+                            1 -> state = 2
+                            2 -> {
+                                clicks++
+                                if (clicks >= result) {
+                                    state = 3
+                                    clicks = 0
+                                    result = (2..4).random()
                                 }
                             }
+                            3 -> state = 4
+                            4 -> state = 1
+                        }
+                    }
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            when (state) {
+                1 -> {
+                    Text(
+                        text = stringResource(R.string.select_lemon),
+                        fontSize = 18.sp
                     )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Button(
+                        onClick = { state = 2 },
+                        shape = RoundedCornerShape(12.dp)
+                    ) {
+                        Text("Pick Lemon")
+                    }
+                }
 
-
-                    Spacer(
-                        modifier = Modifier.height(16.dp)
-                    )
-
+                2 -> {
                     Text(
                         text = stringResource(R.string.squeeze),
-                        fontSize = 18.sp,
+                        fontSize = 18.sp
                     )
-                }
-            }
-
-            3 -> {
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center,
-                ) {
-                    Image(
-                        painter = painterResource(imageResource),
-                        contentDescription = stringResource(R.string.lemon),
-                        modifier = Modifier
-                            .wrapContentSize()
-                            .clickable{
-                                state = 4
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Button(
+                        onClick = {
+                            clicks++
+                            if (clicks >= result) {
+                                state = 3
+                                clicks = 0
+                                result = (2..4).random()
                             }
-                    )
+                        },
+                        shape = RoundedCornerShape(12.dp)
+                    ) {
+                        Text("Squeeze Lemon ($clicks/$result)")
+                    }
+                }
 
-
-                    Spacer(
-                        modifier = Modifier.height(16.dp)
-                    )
-
+                3 -> {
                     Text(
                         text = stringResource(R.string.drink),
-                        fontSize = 18.sp,
+                        fontSize = 18.sp
                     )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Button(
+                        onClick = { state = 4 },
+                        shape = RoundedCornerShape(12.dp)
+                    ) {
+                        Text("Drink Lemonade")
+                    }
                 }
-            }
 
-            4 -> {
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center,
-                ) {
-                    Image(
-                        painter = painterResource(imageResource),
-                        contentDescription = stringResource(R.string.lemon),
-                        modifier = Modifier
-                            .wrapContentSize()
-                            .clickable{
-                                state = 1
-                            }
-                    )
-
-
-                    Spacer(
-                        modifier = Modifier.height(16.dp)
-                    )
-
+                4 -> {
                     Text(
                         text = stringResource(R.string.empty),
-                        fontSize = 18.sp,
+                        fontSize = 18.sp
                     )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Button(
+                        onClick = { state = 1 },
+                        shape = RoundedCornerShape(12.dp)
+                    ) {
+                        Text("Restart")
+                    }
                 }
             }
         }
-
-
     }
 }
 
