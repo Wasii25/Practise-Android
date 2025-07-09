@@ -1,24 +1,43 @@
-package com.example.artspace
-
-import androidx.test.platform.app.InstrumentationRegistry
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.*
+import androidx.compose.ui.test.junit4.ComposeTestRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-
+import com.example.artspace.ArtSpaceScreen
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-import org.junit.Assert.*
-
-/**
- * Instrumented test, which will execute on an Android device.
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
 @RunWith(AndroidJUnit4::class)
-class ExampleInstrumentedTest {
+class ArtSpaceScreenTest {
+
+    @get:Rule
+    val composeTestRule = createComposeRule()
+
     @Test
-    fun useAppContext() {
-        // Context of the app under test.
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.example.artspace", appContext.packageName)
+    fun artworkTitle_isDisplayed() {
+        composeTestRule.setContent {
+            ArtSpaceScreen()
+        }
+
+        // Assert the title of the first artwork is shown
+        composeTestRule.onNodeWithText("Artwork One")
+            .assertIsDisplayed()
     }
+    @Test
+    fun clickingNext_showsNextArtwork() {
+        composeTestRule.setContent {
+            ArtSpaceScreen()
+        }
+
+        // Click the Next button
+        composeTestRule.onNodeWithText("Next")
+            .performClick()
+
+        // Verify the second artwork title is displayed
+        composeTestRule.onNodeWithText("Artwork Two")
+            .assertIsDisplayed()
+    }
+
 }
+
