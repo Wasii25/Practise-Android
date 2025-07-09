@@ -1,9 +1,22 @@
 <resources>
     <string name="app_name">Art Space</string>
-    <string name="artwork_name">Artwork name</string>
-    <string name="artist_name">Artist name</string>
 
     <string name="previous">Previous</string>
     <string name="next">Next</string>
+
+    <string name="artwork_name_1">Artwork One</string>
+    <string name="artist_name_1">Artist A</string>
+    <string name="artwork_name_2">Artwork Two</string>
+    <string name="artist_name_2">Artist B</string>
+    <string name="artwork_name_3">Artwork Three</string>
+    <string name="artist_name_3">Artist C</string>
+    <string name="artwork_name_4">Artwork Four</string>
+    <string name="artist_name_4">Artist D</string>
+    <string name="artwork_name_5">Artwork Five</string>
+    <string name="artist_name_5">Artist E</string>
+    <string name="artwork_name_6">Artwork Six</string>
+    <string name="artist_name_6">Artist F</string>
+    <string name="artwork_name_7">Artwork Seven</string>
+    <string name="artist_name_7">Artist G</string>
 
 </resources>

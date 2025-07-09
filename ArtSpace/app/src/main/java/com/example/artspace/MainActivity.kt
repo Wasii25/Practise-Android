@@ -1,5 +1,6 @@
 package com.example.artspace
 
+import android.media.Image
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -17,10 +18,13 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -41,7 +45,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ArtSpaceTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    ArtSpaceApp()
+                    ArtSpaceScreen()
                 }
             }
         }
@@ -49,7 +53,14 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun ArtSpaceApp(modifier: Modifier = Modifier) {
+fun ArtSpaceApp(
+    titleRes: Int,
+    artistRes: Int,
+    imageRes: Int,
+    onPrevious: () -> Unit,
+    onNext: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     Surface(
         modifier = modifier
             .fillMaxSize()
@@ -62,7 +73,7 @@ fun ArtSpaceApp(modifier: Modifier = Modifier) {
                 .fillMaxSize()
         ) {
             Image(
-                painter = painterResource(R.drawable.nokia),
+                painter = painterResource(imageRes),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
@@ -77,7 +88,7 @@ fun ArtSpaceApp(modifier: Modifier = Modifier) {
                 )
             Column {
                 Text(
-                    text = stringResource(R.string.artwork_name),
+                    text = stringResource(titleRes),
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.headlineSmall,
                     fontStyle = FontStyle.Normal,
@@ -85,7 +96,7 @@ fun ArtSpaceApp(modifier: Modifier = Modifier) {
                     modifier = modifier.fillMaxWidth()
                 )
                 Text(
-                    text = stringResource(R.string.artist_name),
+                    text = stringResource(artistRes),
                     style = MaterialTheme.typography.bodyMedium,
                     fontStyle = FontStyle.Italic,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -97,7 +108,8 @@ fun ArtSpaceApp(modifier: Modifier = Modifier) {
 
             ) {
                 Button(
-                    onClick = { /*TODO*/ },
+                    onClick = onPrevious,
+                    modifier = Modifier.weight(1f)
                 ) {
                     Text(
                         text = stringResource(R.string.previous)
@@ -107,7 +119,8 @@ fun ArtSpaceApp(modifier: Modifier = Modifier) {
                 Spacer(modifier = Modifier.width(24.dp))
 
                 Button(
-                    onClick = { /*TODO*/ }
+                    onClick = onNext,
+                    modifier = Modifier.weight(1f)
                 ) {
                     Text(
                         text = stringResource(R.string.next)
@@ -122,6 +135,56 @@ fun ArtSpaceApp(modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     ArtSpaceTheme {
-        ArtSpaceApp()
+        ArtSpaceScreen()
     }
+}
+
+
+@Composable
+fun ArtSpaceScreen(modifier: Modifier = Modifier) {
+    var currentArtwork by remember { mutableStateOf(1) }
+
+    // Map currentArtwork to resources
+    val imageRes = when (currentArtwork) {
+        1 -> R.drawable.one
+        2 -> R.drawable.two
+        3 -> R.drawable.three
+        4 -> R.drawable.four
+        5 -> R.drawable.five
+        6 -> R.drawable.six
+        else -> R.drawable.seven
+    }
+
+    val titleRes = when (currentArtwork) {
+        1 -> R.string.artwork_name_1
+        2 -> R.string.artwork_name_2
+        3 -> R.string.artwork_name_3
+        4 -> R.string.artwork_name_4
+        5 -> R.string.artwork_name_5
+        6 -> R.string.artwork_name_6
+        else -> R.string.artwork_name_7
+    }
+
+    val artistRes = when (currentArtwork) {
+        1 -> R.string.artist_name_1
+        2 -> R.string.artist_name_2
+        3 -> R.string.artist_name_3
+        4 -> R.string.artist_name_4
+        5 -> R.string.artist_name_5
+        6 -> R.string.artist_name_6
+        else -> R.string.artist_name_7
+    }
+
+    ArtSpaceApp(
+        imageRes = imageRes,
+        titleRes = titleRes,
+        artistRes = artistRes,
+        onPrevious = {
+            currentArtwork = if (currentArtwork > 1) currentArtwork - 1 else 7
+        },
+        onNext = {
+            currentArtwork = if (currentArtwork < 7) currentArtwork + 1 else 1
+        },
+        modifier = modifier
+    )
 }
