@@ -114,7 +114,7 @@ fun DogItem(
     modifier: Modifier = Modifier
 ) {
     var expandable by remember { mutableStateOf(false) }
-    val color by animateC1olorAsState(
+    val color by animateColorAsState(
         targetValue = if (expandable) MaterialTheme.colorScheme.tertiaryContainer
         else MaterialTheme.colorScheme.primaryContainer,
     )
