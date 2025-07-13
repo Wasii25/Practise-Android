@@ -108,9 +108,9 @@ fun topicGrid(modifier: Modifier = Modifier) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2)
     ) {
-        items(DataSource.topics){ topic ->
+        items(DataSource.topics){ 
             topicCard(
-                topic,
+                topic = it,
                 modifier = Modifier.padding(8.dp)
             )
         }
