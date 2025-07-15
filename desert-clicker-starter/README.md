@@ -1,4 +1,4 @@
-Dessert Clicker app
+essert Clicker app
 =====================
 
 Code for Android Basics with Compose Codelab.
