@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 data class GameUiState(
+    val isGameOver: Boolean = false,
     val currentScrambledWord: String = "",
     val isGuessedWordWrong: Boolean = false,
     val score: Int = 0,
