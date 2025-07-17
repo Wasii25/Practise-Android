@@ -1,10 +1,4 @@
 package com.example.unscramble.ui
-
-import com.example.unscramble.data.allWords
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-
 data class GameUiState(
     val isGameOver: Boolean = false,
     val currentScrambledWord: String = "",
