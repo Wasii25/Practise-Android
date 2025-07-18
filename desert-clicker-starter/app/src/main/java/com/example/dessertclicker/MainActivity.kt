@@ -314,3 +314,4 @@ private fun DessertsSoldInfo(dessertsSold: Int, modifier: Modifier = Modifier) {
         )
     }
 }
+
