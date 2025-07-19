@@ -1,21 +1,54 @@
-Unscramble app
-=================================
+# 🌍 Unscramble Word Game
 
-Single player game app that displays scrambled words. To play the game, player has to make a
-word using all the letters in the displayed scrambled word.
-This code demonstrates the Android Architecture component- ViewModel and StateFlow.
+A word-guessing Android game built with **Jetpack Compose** and **ViewModel architecture**.
+This app was developed as part of the *Android Basics with Compose* course by Google.
 
+---
 
-Pre-requisites
---------------
-* Experience with Kotlin syntax.
-* How to create and run a project in Android Studio.
-* How to create composable functions 
+## ✨ Features
 
+* 🄤 **Unscramble Word Gameplay** — users guess the correct word from a scrambled version.
+* 🔹 **Jetpack Compose UI** — fully declarative UI with Material 3 styling.
+* 🔹 **ViewModel + StateFlow** — manages user input, word count, and score across configuration changes.
+* 📜 **Scrollable Game Screen** — vertically scrollable layout ensures a smooth experience across devices.
+* 🧠 **Score Tracking + Game Over Dialog** — displays final score with replay/exit options.
 
-Getting Started
----------------
-1. Install Android Studio, if you don't already have it.
-2. Download the sample.
-3. Import the sample into Android Studio.
-4. Build and run the sample.
+---
+
+## 📱 Screenshots
+
+| Game Start                                                                                                                                                                                                                                                                       | Wrong Guess | Final Score |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | ----------- |
+| \<img width="540" height="1200" alt="image" src="[https://github.com/user-attachments/assets/b](https://github.com/user-attachments/assets/b)<img width="540" height="1200" alt="image" src="https://github.com/user-attachments/assets/89e98071-957c-4206-929e-6d2bd374e194" /> |             |             |
+
+## 🧠 What I Learned
+
+* How to use `ViewModel` and `StateFlow` to persist state in Compose apps
+* Handling user input with `OutlinedTextField` and `KeyboardActions`
+* Showing a `Dialog` with actions (Exit and Play Again)
+* Structuring Composables into reusable and testable units
+* Creating a dynamic and scrollable layout
+
+---
+
+## 🚀 How to Run
+
+1. Clone this repository:
+
+   ```bash
+   git clone https://github.com/wasii25/unscramble-game-app.git
+   ```
+
+2. Open it in **Android Studio** (Giraffe or newer recommended).
+
+3. Run the app on an emulator or device with **API level 24+**.
+
+---
+
+## 💠 Tech Stack
+
+* Kotlin
+* Jetpack Compose
+* ViewModel + StateFlow
+* Material 3 Design
+* Android Studio
