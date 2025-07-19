@@ -19,7 +19,7 @@ This app was developed as part of the *Android Basics with Compose* course by Go
 
 | Game Start                                                                                                                                                                                                                                                                       | Wrong Guess | Final Score |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | ----------- |
-| \<img width="540" height="1200" alt="image" src="[https://github.com/user-attachments/assets/b](https://github.com/user-attachments/assets/b)<img width="540" height="1200" alt="image" src="https://github.com/user-attachments/assets/89e98071-957c-4206-929e-6d2bd374e194" /> |             |             |
+| <img width="540" height="1200" alt="image" src="[https://github.com/user-attachments/assets/b](https://github.com/user-attachments/assets/b)/><img width="540" height="1200" alt="image" src="https://github.com/user-attachments/assets/89e98071-957c-4206-929e-6d2bd374e194" /> |             |             |
 
 ## 🧠 What I Learned
 
