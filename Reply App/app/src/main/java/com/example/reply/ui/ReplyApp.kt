@@ -15,48 +15,68 @@
  */
 package com.example.reply.ui
 
+import androidx.compose.animation.AnimatedVisibility
+import com.example.reply.R
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.reply.data.Email
 import com.example.reply.data.MailboxType
+import com.example.reply.ui.utils.ReplyContentType
+import com.example.reply.ui.utils.ReplyNavigationType
 
 @Composable
-fun ReplyApp(
-    windowSize: WindowWidthSizeClass,
-    modifier: Modifier = Modifier,
+private fun ReplyAppContent(
+    navigationType: ReplyNavigationType,
+    replyUiState: ReplyUiState,
+    onTabPressed: ((MailboxType) -> Unit),
+    onEmailCardPressed: (Email) -> Unit,
+    navigationItemContentList: List<NavigationItemContent>,
+    modifier: Modifier = Modifier
 ) {
-    val viewModel: ReplyViewModel = viewModel()
-    val replyUiState = viewModel.uiState.collectAsState().value
+    val navigationType: ReplyNavigationType
 
-    when (windowSize) {
-        WindowWidthSizeClass.Compact -> {
+    Box(modifier = modifier) {
+        AnimatedVisibility(visible = navigationType == ReplyNavigationType.NAVIGATION_RAIL) {
+            ReplyNavigationRail(
+                currentTab = replyUiState.currentMailbox,
+                onTabPressed = onTabPressed,
+                navigationItemContentList = navigationItemContentList
+            )
         }
-        WindowWidthSizeClass.Medium -> {
-        }
-        WindowWidthSizeClass.Expanded -> {
-        }
-        else -> {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(
+                    MaterialTheme.colorScheme.inverseOnSurface
+                )
+        ) {
+            ReplyListOnlyContent(
+                replyUiState = replyUiState,
+                onEmailCardPressed = onEmailCardPressed,
+                modifier = Modifier.weight(1f)
+                    .padding(
+                        horizontal = dimensionResource(R.dimen.email_list_only_horizontal_padding)
+                    )
+            )
+            ReplyBottomNavigationBar(
+                currentTab = replyUiState.currentMailbox,
+                onTabPressed = onTabPressed,
+                navigationItemContentList = navigationItemContentList,
+                modifier = Modifier
+                    .fillMaxWidth()
+            )
         }
     }
-
-    ReplyHomeScreen(
-        replyUiState = replyUiState,
-        onTabPressed = { mailboxType: MailboxType ->
-            viewModel.updateCurrentMailbox(mailboxType = mailboxType)
-            viewModel.resetHomeScreenStates()
-        },
-        onEmailCardPressed = { email: Email ->
-            viewModel.updateDetailsScreenStates(
-                email = email
-            )
-        },
-        onDetailScreenBackPressed = {
-            viewModel.resetHomeScreenStates()
-        },
-        modifier = modifier
-    )
 }
