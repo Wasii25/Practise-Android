@@ -18,6 +18,7 @@ package com.example.racetracker.ui
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import kotlinx.coroutines.delay
 
 /**
  * This class represents a state holder for race participant.
@@ -44,6 +45,14 @@ class RaceParticipant(
      * Regardless of the value of [initialProgress] the reset function will reset the
      * [currentProgress] to 0
      */
+
+    suspend fun run() {
+        while(currentProgress < maxProgress) {
+            delay(progressDelayMillis)
+            currentProgress += progressIncrement
+        }
+    }
+
     fun reset() {
         currentProgress = 0
     }

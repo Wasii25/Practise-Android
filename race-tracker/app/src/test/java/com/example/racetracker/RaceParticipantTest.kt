@@ -15,7 +15,9 @@
  */
 package com.example.racetracker
 
+import androidx.annotation.VisibleForTesting
 import com.example.racetracker.ui.RaceParticipant
+import kotlinx.coroutines.test.runTest
 
 class RaceParticipantTest {
     private val raceParticipant = RaceParticipant(
@@ -25,4 +27,9 @@ class RaceParticipantTest {
         initialProgress = 0,
         progressIncrement = 1
     )
+
+    @VisibleForTesting
+    fun raceParticipant_RaceStarted_ProgressUpdated() = runTest {
+
+    }
 }
