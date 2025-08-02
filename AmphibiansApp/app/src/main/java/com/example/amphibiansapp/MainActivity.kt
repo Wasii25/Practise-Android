@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AmphibiansAppTheme {
-                val viewModel: AmphibiansViewModel = viewModel()
+                val viewModel: AmphibiansViewModel = viewModel(factory = AmphibiansViewModel.Factory)
                 val uiState by viewModel.uiState.collectAsState()
 
                 HomeScreen(
