@@ -9,7 +9,6 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.amphibiansapp.AmphibiansApplication
 import com.example.amphibiansapp.data.AmphibiansRepository
 import com.example.amphibiansapp.model.Amphibian
-import com.example.amphibiansapp.network.AmphibiansApi
 import com.example.amphibiansapp.network.AmphibiansApiService
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow

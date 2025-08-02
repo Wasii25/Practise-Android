@@ -7,5 +7,3 @@ import retrofit2.Retrofit
 import retrofit2.create
 
 
-object AmphibiansApi {
-}

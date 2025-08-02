@@ -69,4 +69,6 @@ dependencies {
 
     // ViewModel support for Compose (optional but likely needed)
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.2")
+    testImplementation(kotlin("test"))
+    testImplementation(libs.kotlinx.coroutines.test)
 }

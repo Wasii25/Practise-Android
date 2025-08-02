@@ -12,7 +12,7 @@ interface AppContainer {
 }
 
 class DefaultAppContainer: AppContainer {
-    private val base_url = "https://android-kotlin-fun-mars-server.appspot.com/amphibians"
+    private val base_url = "https://android-kotlin-fun-mars-server.appspot.com"
 
     private val json = Json {
         ignoreUnknownKeys = true
