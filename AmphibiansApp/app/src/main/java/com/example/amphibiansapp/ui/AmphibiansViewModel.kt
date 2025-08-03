@@ -1,5 +1,6 @@
 package com.example.amphibiansapp.ui
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
@@ -14,6 +15,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+
 
 class AmphibiansViewModel(
     val amphibiansRepository: AmphibiansRepository,
@@ -36,6 +38,8 @@ class AmphibiansViewModel(
                 val fakeList = amphibiansRepository.getAmphibians()
                 _uiState.value = AmphibiansUiState.Success(fakeList)
             } catch (e: Exception) {
+                val fakeList = amphibiansRepository.getAmphibians()
+                Log.d("ViewModel", "Fetched: $fakeList")
                 _uiState.value = AmphibiansUiState.Error
             }
         }
