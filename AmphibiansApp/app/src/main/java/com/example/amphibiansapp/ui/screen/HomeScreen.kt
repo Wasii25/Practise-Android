@@ -19,27 +19,8 @@ fun HomeScreen(
     modifier: Modifier = Modifier
 ) {
     when (uiState) {
-        is AmphibiansUiState.Loading -> {
-            Box(modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                CircularProgressIndicator()
-            }
-        }
-        is AmphibiansUiState.Success -> {
-            val list = uiState.amphibians
-            LazyColumn {
-                items(list) { amphibian ->
-                    AmphibianCard(amphibian)
-                }
-            }
-        }
-        is AmphibiansUiState.Error -> {
-            Column(modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
-                Text("Failed to load data")
-                Spacer(modifier = Modifier.height(8.dp))
-                Button(onClick = onRetry) {
-                    Text("Retry")
-                }
-            }
-        }
+        is AmphibiansUiState.Loading -> LoadingScreen(modifier = modifier.fillMaxSize())
+        is AmphibiansUiState.Success -> AmphibiansGridScreen(amphibians = uiState.amphibians, modifier = modifier)
+        is AmphibiansUiState.Error -> ErrorScreen(retryAction = onRetry, modifier = modifier.fillMaxSize())
     }
 }

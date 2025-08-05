@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.dp
 import com.example.amphibiansapp.R
 
 @Composable
-fun LoadingScreen() {
+fun LoadingScreen(modifier: Modifier = Modifier) {
     Image(
         painter = painterResource(R.drawable.loading_img),
         contentDescription = "Loading...",

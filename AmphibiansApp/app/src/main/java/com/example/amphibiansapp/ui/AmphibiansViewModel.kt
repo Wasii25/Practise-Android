@@ -33,14 +33,10 @@ class AmphibiansViewModel(
         viewModelScope.launch {
             _uiState.value = AmphibiansUiState.Loading
 
-            try {
-                delay(1000)
-                val fakeList = amphibiansRepository.getAmphibians()
-                _uiState.value = AmphibiansUiState.Success(fakeList)
+            _uiState.value = try {
+                AmphibiansUiState.Success(amphibiansRepository.getAmphibians())
             } catch (e: Exception) {
-                val fakeList = amphibiansRepository.getAmphibians()
-                Log.d("ViewModel", "Fetched: $fakeList")
-                _uiState.value = AmphibiansUiState.Error
+                AmphibiansUiState.Error
             }
         }
     }
