@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Library App</string>
+    <string name="bookshelf">BookShelf</string>
+    <string name="menu">Menu</string>
+    <string name="search">Search</string>
+    <string name="welcome_to_the_bookshelf_app">Welcome to the Bookshelf App</string>
 </resources>

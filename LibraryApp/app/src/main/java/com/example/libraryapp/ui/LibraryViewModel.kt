@@ -9,14 +9,23 @@ import kotlinx.coroutines.launch
 
 class LibraryViewModel: ViewModel() {
 
-    private var _uiState = MutableStateFlow<SearchUiState>(SearchUiState.Loading)
+    private var _uiState = MutableStateFlow<SearchUiState>(SearchUiState.Welcome)
+    private var _searchQuery = MutableStateFlow("")
     val uiState: StateFlow<SearchUiState> = _uiState
+    val searchQuery: StateFlow<String> = _searchQuery
 
-    init {
-        searchBooks("android")
+    fun onSearchQueryChange(newQuery: String) {
+        _searchQuery.value = newQuery
     }
 
-    fun searchBooks(query: String) {
+    fun searchBooks(query: String = _searchQuery.value) {
+        if(query.isBlank()) {
+            _uiState.value = SearchUiState.Welcome
+            return
+        }
+
+        _uiState.value = SearchUiState.Loading
+
         _uiState.value = SearchUiState.Loading
 
         viewModelScope.launch {

@@ -6,6 +6,9 @@ sealed interface SearchUiState {
     data class Success(val books: List<Book>): SearchUiState
     object Error: SearchUiState
     object Loading: SearchUiState
+
+    object Welcome: SearchUiState
+
 }
 
 sealed interface BookDetailsUiState {
