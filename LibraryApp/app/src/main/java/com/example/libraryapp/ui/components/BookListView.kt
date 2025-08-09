@@ -12,14 +12,18 @@ import androidx.compose.ui.unit.dp
 import com.example.libraryapp.model.Book
 
 @Composable
-fun BookListView(books: List<Book>, modifier: Modifier = Modifier) {
+fun BookListView(
+    books: List<Book>,
+    onBookClick: (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
             .padding(16.dp)
     ) {
         items(books) { book ->
-            BookItem(book)
+            BookItem(book, onClick = { onBookClick(book.id)} )
             Spacer(modifier = Modifier.height(12.dp))
         }
     }

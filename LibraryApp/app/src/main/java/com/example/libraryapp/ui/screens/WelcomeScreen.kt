@@ -1,4 +1,4 @@
-package com.example.libraryapp.ui.components
+package com.example.libraryapp.ui.screens
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

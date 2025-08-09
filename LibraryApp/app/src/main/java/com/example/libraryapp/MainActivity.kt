@@ -11,6 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import com.example.libraryapp.ui.LibraryNavHost
 import com.example.libraryapp.ui.screens.LibraryScreen
 import com.example.libraryapp.ui.theme.LibraryAppTheme
 
@@ -21,7 +23,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             LibraryAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    LibraryScreen(
+                    val navController = rememberNavController()
+                    LibraryNavHost(
+                        navController = navController,
                         modifier = Modifier
                             .padding(innerPadding)
                             .fillMaxSize()

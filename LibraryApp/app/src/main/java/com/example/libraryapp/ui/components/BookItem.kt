@@ -1,5 +1,6 @@
 package com.example.libraryapp.ui.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -18,7 +19,7 @@ import coil.compose.AsyncImage
 import com.example.libraryapp.model.Book
 
 @Composable
-fun BookItem(book: Book, modifier: Modifier = Modifier) {
+fun BookItem(book: Book,onClick: (String) -> Unit, modifier: Modifier = Modifier) {
     val volumeInfo = book.volumeInfo
     val thumbnailUrl = volumeInfo.imageLinks?.thumbnail?.replace("http://", "https://")
 
@@ -26,6 +27,7 @@ fun BookItem(book: Book, modifier: Modifier = Modifier) {
         modifier = modifier
             .padding(8.dp)
             .fillMaxWidth()
+            .clickable { onClick(book.id) }
     ) {
         Row(modifier = Modifier.padding(16.dp)) {
             // AsyncImage for book thumbnail
