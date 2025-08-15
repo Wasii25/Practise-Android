@@ -16,32 +16,28 @@
 
 package com.example.inventory.ui.item
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.example.inventory.data.ItemsRepository
 
 /**
- * ViewModel to retrieve and update an item from the [ItemsRepository]'s data source.
+ * ViewModel to retrieve, update and delete an item from the [ItemsRepository]'s data source.
  */
-class ItemEditViewModel(
-    private val itemsRepository: ItemEntryViewModel
+class ItemDetailsViewModel(
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    var itemUiState by mutableStateOf(ItemUiState())
-        private set
+    private val itemId: Int = checkNotNull(savedStateHandle[ItemDetailsDestination.itemIdArg])
 
-    var itemId: Int = -1 // default value, update it manually later
-
-    fun setItemId(id: Int) {
-        itemId = id
-    }
-
-    private fun validateInput(uiState: ItemDetails = itemUiState.itemDetails): Boolean {
-        return with(uiState) {
-            name.isNotBlank() && price.isNotBlank() && quantity.isNotBlank()
-        }
+    companion object {
+        private const val TIMEOUT_MILLIS = 5_000L
     }
 }
+
+/**
+ * UI state for ItemDetailsScreen
+ */
+data class ItemDetailsUiState(
+    val outOfStock: Boolean = true,
+    val itemDetails: ItemDetails = ItemDetails()
+)
